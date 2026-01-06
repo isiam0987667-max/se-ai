@@ -18,7 +18,7 @@ async function sendURL(){
     if(!url){ alert("Enter URL"); return; }
 
     try {
-        const res = await fetch('/add-link', {
+        const res = await fetch('https://se-ai-1.onrender.com', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify({url})
