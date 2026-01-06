@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI GitHub Link Adder</title>
+</head>
+<body>
+
+<h2>AI GitHub Video Link Adder</h2>
+<input type="text" id="urlInput" placeholder="Enter video URL" style="width:80%">
+<button onclick="sendURL()">Add Link</button>
+<p id="status"></p>
+
+<script>
+async function sendURL(){
+    const url = document.getElementById('urlInput').value.trim();
+    if(!url){ alert("Enter URL"); return; }
+
+    try {
+        const res = await fetch('/add-link', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({url})
+        });
+        const data = await res.json();
+        document.getElementById('status').innerText = data.message;
+        document.getElementById('urlInput').value = '';
+    } catch(e){
+        document.getElementById('status').innerText = "Error connecting to server";
+    }
+}
+</script>
+
+</body>
+</html>
